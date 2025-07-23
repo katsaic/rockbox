@@ -12,7 +12,7 @@
 
 This is an experimental build of Rockbox.
 
-Most of the work was already done by the original Rockbox team - all credits to them. Also, thank you to [Chainfire/libsuperuser](https://github.com/Chainfire/libsuperuser) for providing a library that enables easy execution of root commands.
+Most of the work was already done by the original Rockbox team - all credits to them.
 
 I mostly added quick hacks to make this usable on a device without any touch inputs.
 
@@ -86,15 +86,13 @@ sed -i '/key 108   DPAD_DOWN/c\key 106   DPAD_DOWN' Generic.kl
 sed -i '/key 105   DPAD_LEFT/c\key 103   MEDIA_PREVIOUS' Generic.kl
 sed -i '/key 106   DPAD_RIGHT/c\key 108   MEDIA_NEXT' Generic.kl
 sed -i '/key 163   MEDIA_NEXT/c\key 163   DPAD_RIGHT' Generic.kl
-sed -i '/key 165   MEDIA_PREVIOUS/c\key 165   DPAD_LEFT' Generic.kl
+sed -i '/key 165   MEDIA_PREV/c\key 165   DPAD_LEFT' Generic.kl
 adb push Generic.kl /system/usr/keylayout/Generic.kl
 adb shell chmod 644 /system/usr/keylayout/Generic.kl
 adb reboot
 ```
 - Download the latest Rockbox release APK from the sidebar
-```
-adb install rockbox-[240p/360p]-[release].apk
-```
+- Download the latest Rockbox libs.zip and unzip it such that there is a folder called `libs/armeabi`
 - Either use one of the preinstalled themes or supply your own in the .rockbox folder on the SD card
 - Uninstall any apps you do not want
 ```
@@ -104,6 +102,19 @@ adb shell pm list packages
 adb uninstall <package>
 # or if that fails
 adb shell pm disable-user <package>
+```
+- Install rockbox as system app:
+```
+adb remount
+adb push rockbox-[240p/360p]-[release].apk /system/app/org.rockbox.apk
+adb shell chmod 644 /system/app/org.rockbox.apk
+adb shell chown root:root /system/app/org.rockbox.apk
+adb push libs/armeabi/librockbox.so /system/lib/
+adb shell chmod 644 /system/lib/librockbox.so
+adb shell chown root:root /system/lib/librockbox.so
+adb shell rm -rf /data/data/org.rockbox/lib
+adb shell mkdir /data/data/org.rockbox/lib
+adb push libs/armeabi/* /data/data/org.rockbox/lib/.
 ```
 - Restart the device, choose Rockbox as launcher when asked
 ```
