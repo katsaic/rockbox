@@ -418,7 +418,6 @@ int do_menu(const struct menu_item_ex *start_menu, int *start_selected,
     get_menu_callback(menu, &menu_callback);
 
     gui_synclist_draw(&lists);
-    lcd_update(); // Force full framebuffer update after initial menu draw
     gui_synclist_speak_item(&lists);
 
     while (!done)
@@ -767,7 +766,6 @@ int do_menu(const struct menu_item_ex *start_menu, int *start_selected,
 
             gui_synclist_set_title(&lists, lists.title, lists.title_icon);
             gui_synclist_draw(&lists);
-            lcd_update(); // Force full framebuffer update after redraw
             gui_synclist_speak_item(&lists);
         }
     }
