@@ -305,6 +305,7 @@ public class RockboxService extends Service
                         strm.write("ui viewport: 6,3,468,354,1,000000,FFFFFF\n");
                         strm.write("lang: /.rockbox/langs/" + getString(R.string.rockbox_language_file) + "\n");
                         strm.write("wheel vibration intensity: 15\n");
+                        strm.write("idle poweroff: 0\n");
                         strm.close();
                     } catch(Exception e) {
                         Logger.d("Exception when writing default config", e);
