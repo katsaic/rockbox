@@ -1,3 +1,5 @@
+# RETIRED BRANCH - Use y1-240p
+
 # Rockbox Android Fork for Innioasis Y1
 
 | <img src="./img/240p_menu.png" alt="Rockbox-240p Menu" width="75%"/> | <img src="./img/240p_wps.png" alt="Rockbox-240p WPS" width="75%"/> |
